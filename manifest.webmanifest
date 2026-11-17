@@ -1,0 +1,16 @@
+{
+  "name": "Palmarès PEA",
+  "short_name": "PEA",
+  "description": "Top 20 des hausses et des dividendes parmi les actions éligibles au PEA, avec la note financière de chaque société.",
+  "lang": "fr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0d0d0d",
+  "theme_color": "#0d0d0d",
+  "icons": [
+    {"src": "icone-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "icone-512.png", "sizes": "512x512", "type": "image/png"},
+    {"src": "icone-512-masquable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}

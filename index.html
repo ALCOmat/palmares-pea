@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="fr" data-mode="statique">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Palmarès PEA</title>
+<meta name="description" content="Top 20 des hausses et des dividendes parmi les actions éligibles au PEA, avec la note financière de chaque société.">
+<meta name="theme-color" content="#080b11" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f3f5f9" media="(prefers-color-scheme: light)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="PEA">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icone-180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="icone-32.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<svg width="0" height="0" class="sprites" aria-hidden="true">
+  <defs>
+    <linearGradient id="deg-hausse" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" style="stop-color: var(--hausse); stop-opacity: .30"/><stop offset="1" style="stop-color: var(--hausse); stop-opacity: 0"/></linearGradient>
+    <linearGradient id="deg-baisse" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" style="stop-color: var(--baisse); stop-opacity: .26"/><stop offset="1" style="stop-color: var(--baisse); stop-opacity: 0"/></linearGradient>
+  </defs>
+  <symbol id="i-hausse" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 7h6v6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-dividende" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M14.8 9.2a3.2 3.2 0 0 0-5.6 1.1c0 3 5.6 1.5 5.6 4.4a3.2 3.2 0 0 1-5.6 1.1M12 6.5v1.6m0 7.8v1.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-veille" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.6-3.2 8.3-7.5 9.5-4.3-1.2-7.5-4.9-7.5-9.5V6L12 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8.8 12.2l2.2 2.2 4.4-4.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-filtres" viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-actualiser" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M20 4v7h-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-lune" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="currentColor"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 11v6M12 7.5v.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-fermer" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-alerte" viewBox="0 0 24 24"><path d="M12 3.5l9.5 16.5h-19L12 3.5z" fill="currentColor"/><path d="M12 10v4.5M12 17v.4" stroke="#1a1204" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-ok" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5" fill="currentColor"/><path d="M7.8 12.3l2.9 2.9 5.6-6" fill="none" stroke="#04150a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-etoile" viewBox="0 0 24 24"><path d="M12 3.8l2.5 5.1 5.6.8-4.05 3.95.96 5.58L12 16.6l-5.01 2.63.96-5.58L3.9 9.7l5.6-.8L12 3.8z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></symbol>
+  <symbol id="i-etoile-pleine" viewBox="0 0 24 24"><path d="M12 3.8l2.5 5.1 5.6.8-4.05 3.95.96 5.58L12 16.6l-5.01 2.63.96-5.58L3.9 9.7l5.6-.8L12 3.8z" fill="currentColor" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></symbol>
+  <symbol id="i-loupe" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5l5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-cadenas" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+</svg>
+
+<header class="barre">
+  <div class="barre-interne">
+    <a class="marque" href="#" aria-label="Palmarès PEA, haut de page">
+      <img src="icone-180.png" alt="" width="34" height="34">
+      <span class="marque-texte"><strong>Palmarès PEA</strong><span id="sous-titre">Chargement…</span></span>
+    </a>
+    <div class="barre-actions">
+      <span class="pastille" id="statut" role="status"><span class="point"></span><span class="texte">…</span></span>
+      <button type="button" class="icone-btn" id="bouton-methode" aria-label="Méthode, sources et limites" title="Méthode, sources et limites">
+        <svg width="20" height="20"><use href="#i-info"/></svg></button>
+      <button type="button" class="icone-btn" id="theme" aria-label="Changer de thème (clair ou sombre)" title="Thème clair ou sombre">
+        <svg width="19" height="19"><use href="#i-lune"/></svg></button>
+      <button type="button" class="bouton-principal" id="bouton-maj">
+        <svg width="17" height="17" aria-hidden="true"><use href="#i-actualiser"/></svg><span class="libelle">Mettre à jour</span></button>
+    </div>
+  </div>
+  <div class="progression" id="progression" hidden>
+    <div class="progression-barre" aria-hidden="true"><span id="progression-remplie"></span></div>
+    <p class="progression-texte"><span id="progression-etape">…</span> <span id="progression-detail"></span></p>
+  </div>
+</header>
+
+<main class="page" id="haut">
+  <p class="message" id="message" aria-live="polite"></p>
+
+  <section class="vitrine" id="vitrine" aria-label="Chiffres clés">
+    <article class="carte-kpi squelette"></article><article class="carte-kpi squelette"></article>
+    <article class="carte-kpi squelette"></article><article class="carte-kpi squelette"></article>
+  </section>
+
+  <div class="commandes-liste">
+    <nav class="onglets" role="tablist" aria-label="Classements">
+      <button type="button" role="tab" id="onglet-hausses" data-onglet="hausses" aria-controls="panneau-hausses" aria-selected="true">
+        <svg width="20" height="20" aria-hidden="true"><use href="#i-hausse"/></svg><span>Hausses</span></button>
+      <button type="button" role="tab" id="onglet-dividendes" data-onglet="dividendes" aria-controls="panneau-dividendes" aria-selected="false">
+        <svg width="20" height="20" aria-hidden="true"><use href="#i-dividende"/></svg><span>Dividendes</span></button>
+      <button type="button" role="tab" id="onglet-veille" data-onglet="veille" aria-controls="panneau-veille" aria-selected="false">
+        <svg width="20" height="20" aria-hidden="true"><use href="#i-veille"/></svg><span>Veille</span></button>
+      <button type="button" role="tab" id="onglet-favoris" data-onglet="favoris" aria-controls="panneau-favoris" aria-selected="false">
+        <svg width="20" height="20" aria-hidden="true"><use href="#i-etoile"/></svg><span>Favoris</span></button>
+    </nav>
+    <button type="button" class="bouton-filtres" id="bouton-filtres" aria-expanded="false" aria-controls="filtres">
+      <svg width="18" height="18" aria-hidden="true"><use href="#i-filtres"/></svg><span>Filtres</span><span class="compte" id="compte-filtres" hidden></span>
+    </button>
+  </div>
+
+  <section class="filtres" id="filtres" aria-label="Filtres" hidden>
+    <div class="filtre filtre-places">
+      <span class="filtre-titre" id="titre-places">Places</span>
+      <div class="puces" id="places" role="group" aria-labelledby="titre-places"></div>
+    </div>
+    <div class="filtre-ligne">
+      <label class="filtre"><span class="filtre-titre">Capitalisation</span>
+        <select id="filtre-cap">
+          <option value="0">Toutes</option>
+          <option value="150000000">150 M€ et plus</option>
+          <option value="1000000000">1 Md€ et plus</option>
+          <option value="10000000000">10 Md€ et plus</option>
+        </select></label>
+      <label class="filtre"><span class="filtre-titre">Échanges par jour</span>
+        <select id="filtre-adv">
+          <option value="0">Tous (20 k€ et plus)</option>
+          <option value="250000">250 k€ et plus</option>
+          <option value="1000000" selected>1 M€ et plus</option>
+          <option value="10000000">10 M€ et plus</option>
+        </select></label>
+      <label class="filtre"><span class="filtre-titre">Secteur</span>
+        <select id="filtre-secteur"><option value="">Tous</option></select></label>
+      <button type="button" class="lien-reinit" id="reinit-filtres">Réinitialiser</button>
+    </div>
+  </section>
+
+  <section class="panneau" id="panneau-hausses" role="tabpanel" aria-labelledby="onglet-hausses">
+    <header class="panneau-entete">
+      <div>
+        <h2>Plus fortes hausses depuis le 1<sup>er</sup> janvier</h2>
+        <p class="precision" id="precision-perf">&nbsp;</p>
+      </div>
+      <div class="segments" role="group" aria-label="Mesure de la performance" id="choix-perf">
+        <button type="button" data-perf="perf_eur" aria-pressed="true">Cours</button>
+        <button type="button" data-perf="perf_tr_eur" aria-pressed="false">Dividendes réinvestis</button>
+      </div>
+    </header>
+    <div class="liste-entete perf" aria-hidden="true">
+      <span>#</span><span>Société</span><span>Note</span><span class="c-secteur">Secteur</span><span class="d c-cours">Cours</span>
+      <span id="entete-perf">Hausse du cours</span><span class="c-courbe">Depuis le 1<sup>er</sup> janv.</span>
+      <span class="d c-cap">Capitalisation</span><span class="d c-adv">Échangé / jour</span>
+    </div>
+    <ol class="liste perf" id="liste-perf"></ol>
+    <p class="vide" id="vide-perf" hidden>Aucune action ne passe ces filtres.</p>
+  </section>
+
+  <section class="panneau" id="panneau-dividendes" role="tabpanel" aria-labelledby="onglet-dividendes" hidden>
+    <header class="panneau-entete">
+      <div>
+        <h2>Meilleures actions à dividendes</h2>
+        <p class="precision" id="precision-div">&nbsp;</p>
+      </div>
+      <div class="reglages-div">
+        <label class="interrupteur"><input type="checkbox" id="filtre-regulier" checked><span class="glissiere" aria-hidden="true"></span>Dividende régulier</label>
+        <label class="filtre filtre-tri"><span class="visuellement-cache">Classer par</span>
+          <select id="tri-div">
+            <option value="rendement">Rendement brut</option>
+            <option value="net">Rendement net PEA (estimé)</option>
+            <option value="cagr5">Croissance du dividende (5 ans)</option>
+          </select></label>
+      </div>
+    </header>
+    <div class="liste-entete div" aria-hidden="true">
+      <span>#</span><span>Société</span><span>Note</span><span id="entete-div">Rendement brut</span>
+      <span class="d c-net" id="entete-net">Net PEA</span><span class="d c-montant">Dividende / an</span>
+      <span class="c-regularite">Régularité</span><span class="d c-cagr" id="entete-cagr">Croissance 5 ans</span>
+      <span class="c-histo">Historique</span><span class="d c-payout">Distribution</span><span class="d c-perf2">2026</span>
+    </div>
+    <ol class="liste div" id="liste-div"></ol>
+    <p class="vide" id="vide-div" hidden>Aucune action ne passe ces filtres.</p>
+  </section>
+
+  <section class="panneau" id="panneau-veille" role="tabpanel" aria-labelledby="onglet-veille" hidden>
+    <header class="panneau-entete">
+      <div>
+        <h2>Veille financière</h2>
+        <p class="precision" id="precision-veille">&nbsp;</p>
+      </div>
+      <div class="segments" role="group" aria-label="Sociétés suivies">
+        <button type="button" data-veille="tops" aria-pressed="true">Les deux top 20</button>
+        <button type="button" data-veille="toutes" aria-pressed="false">Toutes</button>
+      </div>
+    </header>
+    <div class="liste-entete veille" aria-hidden="true">
+      <span>#</span><span>Société</span><span>Note</span><span class="d c-evol">Évol.</span><span class="c-presence">Dans les top 20</span>
+      <span class="c-piliers" title="Bilan et dette · rentabilité · trésorerie et dividende · croissance · valorisation">Piliers sur 10</span><span class="c-alertes">Alertes</span>
+    </div>
+    <ol class="liste veille" id="liste-veille"></ol>
+    <p class="vide" id="vide-veille" hidden>Aucune société analysée avec ces filtres.</p>
+  </section>
+
+  <section class="panneau" id="panneau-favoris" role="tabpanel" aria-labelledby="onglet-favoris" hidden>
+    <header class="panneau-entete">
+      <div>
+        <h2>Mes favoris</h2>
+        <p class="precision" id="precision-favoris">&nbsp;</p>
+      </div>
+      <div class="recherche">
+        <svg width="18" height="18" aria-hidden="true"><use href="#i-loupe"/></svg>
+        <input type="search" id="recherche" placeholder="Ajouter une action : nom, code ou ISIN" autocomplete="off"
+          autocapitalize="off" spellcheck="false" enterkeyhint="search" aria-label="Chercher une action à ajouter aux favoris"
+          aria-controls="resultats" aria-expanded="false">
+        <ul class="resultats" id="resultats" hidden></ul>
+      </div>
+    </header>
+    <div class="liste-entete favoris" id="entete-favoris" aria-hidden="true">
+      <span>Société</span><span>Note</span><span>Depuis le 1<sup>er</sup> janv.</span><span class="c-courbe">Évolution</span>
+      <span class="d c-rend">Rendement</span><span class="c-alertes">Alertes</span>
+    </div>
+    <ol class="liste favoris" id="liste-favoris"></ol>
+    <div class="vide vide-favoris" id="vide-favoris" hidden>
+      <svg width="30" height="30" aria-hidden="true"><use href="#i-etoile"/></svg>
+      <p><strong>Aucun favori pour l'instant</strong></p>
+      <p>Pour suivre une action : l'étoile à côté de son nom, dans une liste ou dans sa fiche, ou la recherche ci-dessus.</p>
+    </div>
+  </section>
+
+  <p class="avertissement">Classement factuel calculé à partir de données publiques (Yahoo Finance, Euronext, Deutsche Börse),
+    sans valeur de conseil en investissement. L'éligibilité au PEA est estimée : votre courtier reste seul juge.</p>
+</main>
+
+<dialog class="feuille" id="methode" aria-labelledby="methode-titre">
+  <div class="feuille-corps">
+    <header class="feuille-entete">
+      <h2 id="methode-titre">Méthode, sources et limites</h2>
+      <button type="button" class="icone-btn fermer" data-fermer aria-label="Fermer"><svg width="20" height="20"><use href="#i-fermer"/></svg></button>
+    </header>
+    <div class="methode-corps" id="methode-corps"></div>
+  </div>
+</dialog>
+
+<dialog class="feuille fiche" id="fiche" aria-labelledby="fiche-titre">
+  <div class="feuille-corps" id="fiche-corps"></div>
+</dialog>
+
+<dialog class="verrou" id="verrou" aria-labelledby="verrou-titre">
+  <form id="verrou-formulaire" method="dialog">
+    <div class="verrou-icone"><img src="icone-180.png" alt="" width="76" height="76"></div>
+    <h2 id="verrou-titre">Palmarès PEA</h2>
+    <p>Tes données sont chiffrées. Saisis ton mot de passe : cet appareil s'en souviendra.</p>
+    <label class="visuellement-cache" for="verrou-mdp">Mot de passe</label>
+    <div class="champ-mdp"><svg width="18" height="18" aria-hidden="true"><use href="#i-cadenas"/></svg>
+      <input type="password" id="verrou-mdp" autocomplete="current-password" required placeholder="Mot de passe"></div>
+    <p class="verrou-erreur" id="verrou-erreur" role="alert"></p>
+    <button type="submit" class="bouton-principal large" id="verrou-ouvrir">Ouvrir</button>
+  </form>
+</dialog>
+
+<div class="infobulle" id="infobulle" role="tooltip" hidden></div>
+<script src="app.js"></script>
+</body>
+</html>
